@@ -37,7 +37,10 @@ const Wrapper = styled.div`
 
 const MainSection = styled.main`
   grid-area: main;
-  background: ${({ theme }) => theme.colors.primary_variant_4};
+  background: ${({ theme }) => theme.colors.variant_4};
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 export default Layout;

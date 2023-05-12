@@ -55,7 +55,7 @@ function Sidebar(props: PropsWithChildren<Props>) {
 const SidebarWrapper = styled.aside`
   grid-area: aside;
   position: relative;
-  background: ${({ theme }) => theme.colors.primary_variant_3};
+  background: ${({ theme }) => theme.colors.variant_3};
 `;
 
 const SidebarNavWrapper = styled.ul`
@@ -75,7 +75,7 @@ const SidebarListItems = styled.li`
   gap: 1rem;
   border-radius: 0.2rem;
   padding: 1rem 0.5rem;
-  color: #666666;
+  color: ${({ theme }) => theme.colors.sidebar.text};
   font-size: 1.4rem;
   font-weight: 600;
   svg {
@@ -83,8 +83,8 @@ const SidebarListItems = styled.li`
     height: 32px;
   }
   &:hover {
-    background: ${({ theme }) => theme.colors.primary_variant_4};
-    color: #000000;
+    background: ${({ theme }) => theme.colors.variant_4};
+    color: ${({ theme }) => theme.colors.sidebar.highlight_color};
   }
 `;
 
