@@ -1,21 +1,9 @@
 import { styled } from 'styled-components';
-import { useTheme } from '../../Context/ThemeContext';
+import { useTheme } from '../../Contexts/ThemeContext';
+
 
 function Header() {
-  const { state, dispatch } = useTheme();
-
-  const toggleTheme = () => {
-    const theme: string = state.theme.name;
-    if(theme === 'Light'){
-      dispatch({
-        type: 'Dark'
-      })
-    } else {
-      dispatch({
-        type: 'Light'
-      })
-    }
-  }
+  const {toggleTheme} = useTheme();
   return (
     <HeaderWrapper>
       <HeaderLogo>React Context Playround</HeaderLogo>

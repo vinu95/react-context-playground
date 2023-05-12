@@ -5,17 +5,21 @@ import Header from "./Header";
 import Footer from "./Footer";
 import Sidebar from "./Sidebar";
 
+type wrapperProps = {
+  isOpen: boolean;
+};
+
 function Layout() {
-  const [sidebarOpen, setSideBarOpen] = useState<boolean>(false);
+  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState<boolean>(true);
 
   const handleViewSidebar = () => {
-    setSideBarOpen(!sidebarOpen);
+    setIsSidebarCollapsed(prevState => !prevState);
   };
 
   return (
-    <Wrapper>
+    <Wrapper isOpen={isSidebarCollapsed}>
       <Header />
-      <Sidebar isOpen={sidebarOpen} toggleSidebar={handleViewSidebar}/>
+      <Sidebar isOpen={isSidebarCollapsed} toggleSidebar={handleViewSidebar} />
       <MainSection>
         <Outlet />
       </MainSection>
@@ -24,20 +28,24 @@ function Layout() {
   );
 }
 
-const Wrapper = styled.div`
+const Wrapper = styled.div<wrapperProps>`
   display: grid;
   grid-template-areas:
     "header header"
     "aside main"
     "footer footer";
-  grid-template-columns: 350px 3fr;
+  grid-template-columns: minmax(250px, 1fr) 4fr;
   grid-template-rows: 5rem auto 4rem;
   min-height: 100vh;
+  ${({ isOpen }) => isOpen && `grid-template-columns: 100px 1fr`};
 `;
 
 const MainSection = styled.main`
   grid-area: main;
-  background: ${({ theme }) => theme.colors.primary_variant_4};
+  background: ${({ theme }) => theme.colors.variant_4};
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 export default Layout;

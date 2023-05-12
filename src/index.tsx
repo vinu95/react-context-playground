@@ -5,6 +5,12 @@ import { router } from "./router";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 
+// Start the mocking conditionally.
+if (process.env.NODE_ENV === "development") {
+  const { worker } = require("./Mocks/browser");
+  worker.start();
+}
+
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );

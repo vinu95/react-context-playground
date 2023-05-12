@@ -1,26 +1,6 @@
 import { createContext, useContext, useReducer } from "react";
-import themes from "../Theme/Schema";
+import themes, { ThemeType } from "../Theme/Schema";
 
-type ThemeType = {
-  id: string;
-  name: string;
-  colors: {
-    primary_variant_1: string,
-    primary_variant_2: string,
-    primary_variant_3: string,
-    primary_variant_4: string,
-    body: string;
-    text: string;
-    button: {
-      text: string;
-      background: string;
-    };
-    link: {
-      text: string;
-      opacity: number;
-    };
-  };
-};
 type ThemeOptions = "Light" | "Dark";
 type Action = { type: ThemeOptions };
 type Dispatch = (action: Action) => void;
@@ -53,7 +33,7 @@ function themeReducer(state: State, action: Action) {
 
 function CustomThemeProvider({ children }: ThemeProviderProps) {
   const [state, dispatch] = useReducer(themeReducer, {
-    theme: themes.light,
+    theme: themes.dark,
   });
   const value = { state, dispatch };
   return (
@@ -68,7 +48,20 @@ function useTheme() {
   if (context === undefined) {
     throw new Error("useTheme must be used within a ThemeProvider");
   }
-  return context;
+  const { state, dispatch } = context;
+  const { theme } = state;
+  const toggleTheme = () => {
+    if (theme.name === "Light") {
+      dispatch({
+        type: "Dark",
+      });
+    } else {
+      dispatch({
+        type: "Light",
+      });
+    }
+  };
+  return { context, toggleTheme, theme };
 }
 
 export { CustomThemeProvider, useTheme };

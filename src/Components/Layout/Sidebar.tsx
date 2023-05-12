@@ -1,4 +1,3 @@
-
 import { PropsWithChildren } from "react";
 import { styled } from "styled-components";
 import { Link } from "react-router-dom";
@@ -8,46 +7,60 @@ import {
   faPeopleGroup,
   faChartSimple,
   faUserPlus,
+  faChevronRight,
+  faChevronLeft,
 } from "@fortawesome/free-solid-svg-icons";
-
 export interface Props {
-  isOpen: boolean,
-  toggleSidebar: () => void,
+  isOpen: boolean;
+  toggleSidebar: () => void;
 }
 
+type ListItemType = Omit<Props, "toggleSidebar">;
+
 function Sidebar(props: PropsWithChildren<Props>) {
-  const {isOpen, toggleSidebar} = props;
-  
+  const { isOpen, toggleSidebar } = props;
+
+  const SidebarText = (content: string) => {
+    if (isOpen) return;
+    return content;
+  };
+
   return (
     <SidebarWrapper>
       <SidebarNavWrapper>
         <Link to="dashboard">
-          <SidebarListItems>
+          <SidebarListItems isOpen={isOpen}>
             <FontAwesomeIcon icon={faHouse} />
-            Dashboards
+            {SidebarText("Dashboards")}
           </SidebarListItems>
         </Link>
         <Link to="teams">
           {" "}
-          <SidebarListItems>
+          <SidebarListItems isOpen={isOpen}>
             <FontAwesomeIcon icon={faPeopleGroup} />
-            Teams
+            {SidebarText("Teams")}
           </SidebarListItems>
         </Link>
         <Link to="projects">
-          <SidebarListItems>
+          <SidebarListItems isOpen={isOpen}>
             <FontAwesomeIcon icon={faChartSimple} />
-            Projects
+            {SidebarText("Projects")}
           </SidebarListItems>
         </Link>
         <Link to="addMember">
-          <SidebarListItems>
+          <SidebarListItems isOpen={isOpen}>
             <FontAwesomeIcon icon={faUserPlus} />
-            Add Members
+            {SidebarText("Add Members")}
           </SidebarListItems>
         </Link>
       </SidebarNavWrapper>
-      <ToggleButton>Click</ToggleButton>
+      <ToggleButton onClick={toggleSidebar}>
+        {isOpen ? (
+          <FontAwesomeIcon icon={faChevronRight} />
+        ) : (
+          <FontAwesomeIcon icon={faChevronLeft} />
+        )}
+      </ToggleButton>
     </SidebarWrapper>
   );
 }
@@ -55,7 +68,7 @@ function Sidebar(props: PropsWithChildren<Props>) {
 const SidebarWrapper = styled.aside`
   grid-area: aside;
   position: relative;
-  background: ${({ theme }) => theme.colors.primary_variant_3};
+  background: ${({ theme }) => theme.colors.variant_3};
 `;
 
 const SidebarNavWrapper = styled.ul`
@@ -69,13 +82,14 @@ const SidebarNavWrapper = styled.ul`
   }
 `;
 
-const SidebarListItems = styled.li`
+const SidebarListItems = styled.li<ListItemType>`
   display: flex;
+  ${({ isOpen }) => isOpen && `justify-content: center;`};
   align-items: center;
   gap: 1rem;
   border-radius: 0.2rem;
   padding: 1rem 0.5rem;
-  color: #666666;
+  color: ${({ theme }) => theme.colors.sidebar.text};
   font-size: 1.4rem;
   font-weight: 600;
   svg {
@@ -83,15 +97,15 @@ const SidebarListItems = styled.li`
     height: 32px;
   }
   &:hover {
-    background: ${({ theme }) => theme.colors.primary_variant_4};
-    color: #000000;
+    background: ${({ theme }) => theme.colors.variant_4};
+    color: ${({ theme }) => theme.colors.sidebar.highlight_color};
   }
 `;
 
 const ToggleButton = styled.button`
   position: absolute;
-  bottom: 10px;
-  right: -25px;
+  bottom: 1rem;
+  right: 1rem;
   border-radius: 50%;
   height: 50px;
   width: 50px;
