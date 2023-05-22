@@ -1,39 +1,51 @@
-import { useState } from "react";
+import { useMemo } from "react";
 import { AgGridReact } from "ag-grid-react";
+import { useTheme } from "../../Contexts/ThemeContext";
+import { useTeams } from "../../Contexts/UserContext";
 import { useQuery } from "@tanstack/react-query";
 import { getUsers } from "../../Services/api/api";
-import { useTheme } from "../../Contexts/ThemeContext";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
 
 function Teams() {
   const { theme } = useTheme();
-  const { data: rowData } = useQuery({
+  const { context } = useTeams();
+  const {
+    state: { userList, registeredUsers },
+    dispatch,
+  } = context;
+
+  useQuery({
     queryKey: ["Users"],
-    queryFn: getUsers,
+    queryFn: () => getUsers(dispatch),
   });
 
-  const [columnDefs] = useState([
-    { field: "name" },
-    { field: "username" },
-    { field: "email" },
-    { field: "company.name" },
-    { field: "address.city" },
-  ]);
+  const columnDefs = [
+    { field: "name", headerName: "Name" },
+    { field: "username", headerName: "UserName" },
+    { field: "email", headerName: "Email ID" },
+    { field: "company.name", headerName: "Company Name" },
+    { field: "address.city", headerName: "City" },
+  ];
 
   const defaultColDef = {
     filter: "agTextColumnFilter",
   };
+
+  const allusers = useMemo(() => {
+    if (!userList) return;
+    return [...registeredUsers, ...userList];
+  }, [userList, registeredUsers]);
 
   return (
     <div
       className={
         theme.name === "Dark" ? "ag-theme-alpine-dark" : "ag-theme-alpine"
       }
-      style={{ height: 480, width: 800 }}
+      style={{ height: 480, width: 960 }}
     >
       <AgGridReact
-        rowData={rowData}
+        rowData={allusers}
         columnDefs={columnDefs}
         defaultColDef={defaultColDef}
       ></AgGridReact>

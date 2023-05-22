@@ -16,7 +16,7 @@ function App() {
         <GlobalStyles />
         <Layout />
       </ThemeProvider>
-      <ReactQueryDevtools initialIsOpen={true} />
+      <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   );
 }

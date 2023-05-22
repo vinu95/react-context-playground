@@ -2,16 +2,24 @@ import { createContext, useContext, useReducer } from "react";
 import themes, { ThemeType } from "../Theme/Schema";
 
 type ThemeOptions = "Light" | "Dark";
-type Action = { type: ThemeOptions };
-type Dispatch = (action: Action) => void;
-type State = { theme: ThemeType };
-type ThemeProviderProps = { children: React.ReactNode };
+interface ThemeAction {
+  type: ThemeOptions;
+  payload?: ThemeType;
+}
+
+interface ThemeState {
+  theme: ThemeType;
+}
+interface ThemeProviderProps {
+  children: React.ReactNode;
+}
+type Dispatch = (action: ThemeAction) => void;
 
 const ThemeStateContext = createContext<
-  { state: State; dispatch: Dispatch } | undefined
+  { state: ThemeState; dispatch: Dispatch } | undefined
 >(undefined);
 
-function themeReducer(state: State, action: Action) {
+function themeReducer(state: ThemeState, action: ThemeAction) {
   switch (action.type) {
     case "Light": {
       return {

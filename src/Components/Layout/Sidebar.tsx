@@ -28,33 +28,32 @@ function Sidebar(props: PropsWithChildren<Props>) {
   return (
     <SidebarWrapper>
       <SidebarNavWrapper>
-        <Link to="dashboard">
-          <SidebarListItems isOpen={isOpen}>
+        <SidebarListItems isOpen={isOpen}>
+          <Link to="dashboard" aria-label="Dashboard">
             <FontAwesomeIcon icon={faHouse} />
             {SidebarText("Dashboards")}
-          </SidebarListItems>
-        </Link>
-        <Link to="teams">
-          {" "}
-          <SidebarListItems isOpen={isOpen}>
+          </Link>
+        </SidebarListItems>
+        <SidebarListItems isOpen={isOpen}>
+          <Link to="teams" aria-label="Teams">
             <FontAwesomeIcon icon={faPeopleGroup} />
             {SidebarText("Teams")}
-          </SidebarListItems>
-        </Link>
-        <Link to="projects">
-          <SidebarListItems isOpen={isOpen}>
+          </Link>
+        </SidebarListItems>
+        <SidebarListItems isOpen={isOpen}>
+          <Link to="projects" aria-label="Projects">
             <FontAwesomeIcon icon={faChartSimple} />
             {SidebarText("Projects")}
-          </SidebarListItems>
-        </Link>
-        <Link to="addMember">
-          <SidebarListItems isOpen={isOpen}>
+          </Link>
+        </SidebarListItems>
+        <SidebarListItems isOpen={isOpen}>
+          <Link to="addMember" aria-label="Add Member">
             <FontAwesomeIcon icon={faUserPlus} />
             {SidebarText("Add Members")}
-          </SidebarListItems>
-        </Link>
+          </Link>
+        </SidebarListItems>
       </SidebarNavWrapper>
-      <ToggleButton onClick={toggleSidebar}>
+      <ToggleButton onClick={toggleSidebar} aria-label="Sidebar Toggle">
         {isOpen ? (
           <FontAwesomeIcon icon={faChevronRight} />
         ) : (
@@ -83,22 +82,25 @@ const SidebarNavWrapper = styled.ul`
 `;
 
 const SidebarListItems = styled.li<ListItemType>`
-  display: flex;
-  ${({ isOpen }) => isOpen && `justify-content: center;`};
-  align-items: center;
-  gap: 1rem;
-  border-radius: 0.2rem;
-  padding: 1rem 0.5rem;
-  color: ${({ theme }) => theme.colors.sidebar.text};
-  font-size: 1.4rem;
-  font-weight: 600;
-  svg {
-    width: 32px;
-    height: 32px;
-  }
-  &:hover {
-    background: ${({ theme }) => theme.colors.variant_4};
-    color: ${({ theme }) => theme.colors.sidebar.highlight_color};
+  list-style: none;
+  a {
+    display: flex;
+    ${({ isOpen }) => isOpen && `justify-content: center;`};
+    align-items: center;
+    gap: 1rem;
+    border-radius: 0.2rem;
+    padding: 1rem 0.5rem;
+    color: ${({ theme }) => theme.colors.sidebar.text};
+    font-size: 1.4rem;
+    font-weight: 600;
+    svg {
+      width: 32px;
+      height: 32px;
+    }
+    &:hover {
+      background: ${({ theme }) => theme.colors.variant_4};
+      color: ${({ theme }) => theme.colors.sidebar.highlight_color};
+    }
   }
 `;
 
@@ -110,6 +112,8 @@ const ToggleButton = styled.button`
   height: 50px;
   width: 50px;
   padding: unset;
+  font-size: 1.5rem;
+  background: ${({ theme }) => theme.colors.variant_2};
 `;
 
 export default Sidebar;

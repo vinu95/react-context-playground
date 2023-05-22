@@ -230,3 +230,105 @@ export const usersList = [
     },
   },
 ];
+
+export const DashboardData = [
+  {
+    id: 1,
+    title: "Account Balance",
+    currency: "USD",
+    amount: 30211.28,
+  },
+  {
+    id: 2,
+    title: "Pending",
+    currency: "USD",
+    amount: 30211.28,
+  },
+  {
+    id: 3,
+    title: "Processed",
+    currency: "USD",
+    amount: -30211.28,
+  },
+  {
+    id: 4,
+    title: "Net Worth",
+    currency: "USD",
+    amount: 30211.28,
+  },
+  {
+    id: 5,
+    title: "Investments",
+    currency: "USD",
+    amount: 30211.28,
+  },
+  {
+    id: 6,
+    title: "Cash",
+    currency: "USD",
+    amount: 30211.28,
+  },
+];
+
+export const MatchStats = [
+    {
+      Year: 2008,
+      Team: "Rajasthan Royals",
+    },
+    {
+      Year: 2009,
+      Team: "Deccan Chargers",
+    },
+    {
+      Year: 2010,
+      Team: "Chennai Super Kings",
+    },
+    {
+      Year: 2011,
+      Team: "Chennai Super Kings",
+    },
+    {
+      Year: 2012,
+      Team: "Kolkata Knight Riders",
+    },
+    {
+      Year: 2013,
+      Team: "Mumbai Indians",
+    },
+    {
+      Year: 2014,
+      Team: "Kolkata Knight Riders",
+    },
+    {
+      Year: 2015,
+      Team: "Mumbai Indians",
+    },
+    {
+      Year: 2016,
+      Team: "Sunrisers Hyderabad",
+    },
+    {
+      Year: 2017,
+      Team: "Mumbai Indians",
+    },
+    {
+      Year: 2018,
+      Team: "Chennai Super Kings",
+    },
+    {
+      Year: 2018,
+      Team: "MumbaiIndians",
+    },
+    {
+      Year: 2020,
+      Team: "Mumbai Indians",
+    },
+    {
+      Year: 2021,
+      Team: "Chennai Super Kings",
+    },
+    {
+      Year: 2022,
+      Team: "Gujarat Titans",
+    },
+]

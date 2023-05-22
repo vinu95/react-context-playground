@@ -1,6 +1,7 @@
 import { lazy } from "react";
 import { createBrowserRouter } from "react-router-dom";
 import { CustomThemeProvider } from "./Contexts/ThemeContext";
+import { UserProvider } from "./Contexts/UserContext";
 import App from "./App";
 
 const Dashboard = lazy(() => import("./Components/Dashboard"));
@@ -12,15 +13,24 @@ export const router = createBrowserRouter([
   {
     path: "/",
     element: (
-        <CustomThemeProvider>
+      <CustomThemeProvider>
+        <UserProvider>
           <App />
-        </CustomThemeProvider>
+        </UserProvider>
+      </CustomThemeProvider>
     ),
     children: [
       {
         index: true,
+        element: (
+            <Dashboard />
+        ),
+      },
+      {
         path: "/dashboard",
-        element: <Dashboard />,
+        element: (
+            <Dashboard />
+        ),
       },
       {
         path: "/teams",

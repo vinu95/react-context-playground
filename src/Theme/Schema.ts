@@ -74,7 +74,7 @@ const themes: ThemesType = {
         opacity: 0.8,
       },
       sidebar: {
-        text: "#e5c6c6",
+        text: "#b2b2b2",
         highlight_color: "#ffffff"
       }
     },

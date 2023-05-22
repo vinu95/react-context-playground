@@ -1,38 +1,44 @@
-import axiosInstance from "./axios"
+import { Team } from "../../Components/Projects";
+import {
+  CardType,
+  DashboardDispatch,
+  formatCurrency,
+} from "../../Contexts/DashboardContext";
+import { User, UserDispatch } from "../../Contexts/UserContext";
+import axiosInstance from "./axios";
 
-interface company {
-    name: string;
-    catchPhrase: string;
-    bs: string;
-}
+export const getUsers = async (dispatch: UserDispatch) => {
+  try {
+    const response = await axiosInstance.get<User[]>("/users");
+    dispatch({ type: "SET_USERS", payload: response.data });
+    return response.data;
+  } catch (e) {
+    console.error("Get Users Failed");
+  }
+};
 
-interface address {
-    street: string;
-    suite: string;
-    city: string;
-    zipcode: string;
-    geo: {
-        lat: string;
-        lng: string;
-    };
-}
+export const getDashboardData = async (dispatch: DashboardDispatch) => {
+  try {
+    const response = await axiosInstance.get<CardType[]>("/dashboard");
+    const { data } = response;
+    const formattedData = data.map((eachItem) => {
+      return {
+        ...eachItem,
+        amountWithCurrency: formatCurrency(eachItem.currency, eachItem.amount),
+      };
+    });
+    dispatch({ type: "SET_DASHBOARD_DATA", payload: formattedData });
+    return response.data;
+  } catch (e) {
+    console.error("Get Dashboard Api Failed");
+  }
+};
 
-interface user {
-    id: string;
-    name: string;
-    username: string;
-    email: string;
-    phone: string;
-    company: company;
-    address: address;
-    website: string;
-}
-
-export const getUsers = async () => {
-    try {
-        const response = await axiosInstance.get<user[]>('/users');
-        return response.data;
-    } catch(e) {
-        console.error('Get Users Failed')
-    }
-}
+export const getMatchStats = async () => {
+  try {
+    const response = await axiosInstance.get<Team[]>("/match-stats");
+    return response.data;
+  } catch (e) {
+    console.error("Get Match Stats Failed");
+  }
+};
