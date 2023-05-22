@@ -6,6 +6,10 @@ import { useEffect } from "react";
 
 type PathType = `/${string}`;
 
+type ButtonProps = {
+  isdashboard: string;
+};
+
 function Header() {
   const {
     state: { isEditable },
@@ -13,9 +17,10 @@ function Header() {
   } = useDashboard();
   const { pathname } = useLocation();
   const DashboardPath: PathType = "/dashboard";
+  const isDashboard = pathname === DashboardPath;
 
   const handleEditToggle = () => {
-    if (pathname === DashboardPath) dispatch({ type: "SET_EDIT_TOGGLE" });
+    if (isDashboard) dispatch({ type: "SET_EDIT_TOGGLE" });
   };
 
   useEffect(() => {
@@ -30,6 +35,7 @@ function Header() {
       <HeaderLogo>React Context Playround</HeaderLogo>
       <LeftHeaderSection>
         <EditButton
+          isdashboard={String(isDashboard)}
           onClick={handleEditToggle}
           title={`Switch between read and edit mode in dashboard screen (currently on ${
             isEditable ? "edit" : "read"
@@ -54,7 +60,7 @@ const HeaderLogo = styled.span`
   padding: 1rem;
 `;
 
-const EditButton = styled.button`
+const EditButton = styled.button<ButtonProps>`
   width: 250px;
   height: 40px;
   font-size: 1rem;
@@ -63,6 +69,13 @@ const EditButton = styled.button`
   border-radius: 5px;
   background: ${({ theme }) => theme.colors.button.background};
   color: ${({ theme }) => theme.colors.button.text};
+  pointer-events: ${({ isdashboard }) => isdashboard === "true" ? "unset" : "none"};
+  cursor: default;
+
+  &:hover {
+    background: ${({ theme }) => theme.colors.variant_4};
+    color: ${({ theme }) => theme.colors.sidebar.highlight_color};
+  }
 `;
 
 const LeftHeaderSection = styled.div`

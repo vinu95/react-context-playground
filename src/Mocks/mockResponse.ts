@@ -237,36 +237,42 @@ export const DashboardData = [
     title: "Account Balance",
     currency: "USD",
     amount: 30211.28,
+    icon: "scale-balanced"
   },
   {
     id: 2,
     title: "Pending",
     currency: "USD",
     amount: 30211.28,
+    icon: "rotate"
   },
   {
     id: 3,
     title: "Processed",
     currency: "USD",
     amount: -30211.28,
+    icon: "circle-check"
   },
   {
     id: 4,
     title: "Net Worth",
     currency: "USD",
     amount: 30211.28,
+    icon: "circle-dollar-to-slot"
   },
   {
     id: 5,
     title: "Investments",
     currency: "USD",
     amount: 30211.28,
+    icon: "building-columns"
   },
   {
     id: 6,
     title: "Cash",
     currency: "USD",
     amount: 30211.28,
+    icon: "money-bill"
   },
 ];
 
@@ -317,7 +323,7 @@ export const MatchStats = [
     },
     {
       Year: 2018,
-      Team: "MumbaiIndians",
+      Team: "Mumbai Indians",
     },
     {
       Year: 2020,

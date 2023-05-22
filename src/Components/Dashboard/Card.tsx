@@ -1,4 +1,3 @@
-import { faHouse } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { styled } from "styled-components";
 import { CardType, useDashboard } from "../../Contexts/DashboardContext";
@@ -31,7 +30,7 @@ function Card({ data }: { data: CardType }) {
         <h2>{data.title}</h2>
       </CardHeading>
       <CardBody>
-        <FontAwesomeIcon icon={faHouse} />
+        <FontAwesomeIcon icon={data.icon} />
         <EditableSection
           ref={inputRef}
           contentEditable={isEditable}

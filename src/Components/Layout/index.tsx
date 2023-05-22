@@ -7,7 +7,7 @@ import Footer from "./Footer";
 import Sidebar from "./Sidebar";
 
 type wrapperProps = {
-  isOpen: boolean;
+  isopen: string;
 };
 
 function Layout() {
@@ -18,7 +18,7 @@ function Layout() {
   };
 
   return (
-    <Wrapper isOpen={isSidebarCollapsed}>
+    <Wrapper isopen={String(isSidebarCollapsed)}>
       <DashboardProvider>
         <Header />
         <Sidebar
@@ -43,7 +43,7 @@ const Wrapper = styled.div<wrapperProps>`
   grid-template-columns: minmax(250px, 1fr) 4fr;
   grid-template-rows: 5rem auto 4rem;
   min-height: 100vh;
-  ${({ isOpen }) => isOpen && `grid-template-columns: 100px 1fr`};
+  ${({ isopen }) => isopen === "true" && `grid-template-columns: 100px 1fr`};
 `;
 
 const MainSection = styled.main`

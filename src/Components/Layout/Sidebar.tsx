@@ -15,7 +15,9 @@ export interface Props {
   toggleSidebar: () => void;
 }
 
-type ListItemType = Omit<Props, "toggleSidebar">;
+type ListItemType = {
+  isopen: string;
+}
 
 function Sidebar(props: PropsWithChildren<Props>) {
   const { isOpen, toggleSidebar } = props;
@@ -28,25 +30,25 @@ function Sidebar(props: PropsWithChildren<Props>) {
   return (
     <SidebarWrapper>
       <SidebarNavWrapper>
-        <SidebarListItems isOpen={isOpen}>
+        <SidebarListItems isopen={String(isOpen)}>
           <Link to="dashboard" aria-label="Dashboard">
             <FontAwesomeIcon icon={faHouse} />
             {SidebarText("Dashboards")}
           </Link>
         </SidebarListItems>
-        <SidebarListItems isOpen={isOpen}>
+        <SidebarListItems isopen={String(isOpen)}>
           <Link to="teams" aria-label="Teams">
             <FontAwesomeIcon icon={faPeopleGroup} />
             {SidebarText("Teams")}
           </Link>
         </SidebarListItems>
-        <SidebarListItems isOpen={isOpen}>
+        <SidebarListItems isopen={String(isOpen)}>
           <Link to="projects" aria-label="Projects">
             <FontAwesomeIcon icon={faChartSimple} />
-            {SidebarText("Projects")}
+            {SidebarText("Statistics")}
           </Link>
         </SidebarListItems>
-        <SidebarListItems isOpen={isOpen}>
+        <SidebarListItems isopen={String(isOpen)}>
           <Link to="addMember" aria-label="Add Member">
             <FontAwesomeIcon icon={faUserPlus} />
             {SidebarText("Add Members")}
@@ -85,7 +87,7 @@ const SidebarListItems = styled.li<ListItemType>`
   list-style: none;
   a {
     display: flex;
-    ${({ isOpen }) => isOpen && `justify-content: center;`};
+    ${({ isopen }) => isopen === "true" && `justify-content: center;`};
     align-items: center;
     gap: 1rem;
     border-radius: 0.2rem;

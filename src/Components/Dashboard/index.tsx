@@ -3,6 +3,23 @@ import { useDashboard } from "../../Contexts/DashboardContext";
 import Card from "./Card";
 import { useQuery } from "@tanstack/react-query";
 import { getDashboardData } from "../../Services/api/api";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import {
+  faBuildingColumns,
+  faCircleDollarToSlot,
+  faMoneyBill,
+  faCircleCheck,
+  faScaleBalanced,
+  faRotate,
+} from "@fortawesome/free-solid-svg-icons";
+library.add(
+  faBuildingColumns,
+  faCircleDollarToSlot,
+  faMoneyBill,
+  faCircleCheck,
+  faScaleBalanced,
+  faRotate
+);
 
 function Dashboard() {
   const {

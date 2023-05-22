@@ -1,3 +1,4 @@
+import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { createContext, useContext, useReducer } from "react";
 
 export interface CardType {
@@ -6,6 +7,7 @@ export interface CardType {
   currency: string;
   amount: number;
   amountWithCurrency?: string;
+  icon: IconProp,
 }
 
 type UpdateAmountType = Pick<CardType, "id" | "amountWithCurrency">;

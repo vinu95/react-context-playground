@@ -1,4 +1,4 @@
-import { Team } from "../../Components/Projects";
+import { Team } from "../../Components/Statistics";
 import {
   CardType,
   DashboardDispatch,
